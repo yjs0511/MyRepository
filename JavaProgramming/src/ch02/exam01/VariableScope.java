@@ -1,7 +1,7 @@
 package ch02.exam01; // 패키지 선언(전부 소문자로 사용하는게 관례)
 
 public class VariableScope {
-	// 클래스는 첫자는 대문자 다음 단어도 첫자는 대문자가 관례 (파일명과 동일)
+	// .클래스는 첫자는 대문자 다음 단어도 첫자는 대문자가 관례 (파일명과 동일)
 	public static void main(String[] ar) {
 		int var1 = 10;
 		System.out.println("var1= " + var1);
