@@ -4,8 +4,8 @@ public class SwitchExample {
 
 	public static void main(String[] args) {
 		
-		double d = Math.random(); //0.0은 포함 1.0은 포함하지 않는 임의의 수 0.0 < 임의의수 < 1.0
-		/*System.out.println(d); //0 <= 1, 2, 3, 4, 5 < 6 
+		/*double d = Math.random(); //0.0은 포함 1.0은 포함하지 않는 임의의 수 0.0 < 임의의수 < 1.0
+		System.out.println(d); //0 <= 1, 2, 3, 4, 5 < 6 
 		d = d * 6;
 		int num = (int) d;
 		num = num + 1;

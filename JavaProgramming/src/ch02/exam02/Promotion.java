@@ -7,7 +7,7 @@ public class Promotion { //자동 타입 변환
 		long v3 = v2;
 		System.out.println("v3 = "+v3);
 		float v4 = v3;
-		double v5 = v3;
+	//	double v5 = v3;
 		System.out.println("v4 = "+v4);
 	}
 }

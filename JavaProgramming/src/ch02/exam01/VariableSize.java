@@ -3,7 +3,7 @@ package ch02.exam01;
 public class VariableSize {
 
 	public static void main(String[] args) {
-		byte var1 = 10;
+		//byte var1 = 10;
 		//byte var2 = 200;
 		
 		int var3 = 200;
