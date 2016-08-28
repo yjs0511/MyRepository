@@ -2,18 +2,18 @@ package ch05.homework;
 
 import java.util.Scanner;
 
-public class Board {
+public class BoardExample {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		String[][] board = null;	
+		Board[] board = null;	
 		int saveCountIndex = 1;		// 게시판 최신 인덱스 값을 기억
 
 		while (true) {
 			System.out.println("------------------------------------------------------------------------");
 			if (board == null) {	// 입력이 전혀 안되있을 경우만 보여주는 보기 실패
 				System.out.println("2. 글쓰기 | 6. 종료");
-				board = new String[100][];	// 한번만 실행해야 하므로
+				board = new Board[100];	// 한번만 실행해야 하므로
 			} else {
 				System.out.println("1. 목록 | 2. 글쓰기 | 3. 상세보기 | 4. 수정하기 | 5. 삭제하기 | 6. 종료");
 			}
@@ -25,10 +25,9 @@ public class Board {
 				System.out.println("*********************************************************");
 				System.out.println("|게시물 번호\t|제목\t\t|글쓴이\t\t|조회수|");
 				System.out.println("*********************************************************");
-				for (String[] article : board) {	// article 배열 선언 후 board 길이만큼 반복
+				for (Board article : board) {	// article 배열 선언 후 board 길이만큼 반복
 					if (article != null) {	// article이 비어있지 않은 경우만 실행
-						System.out
-								.println(article[0] + "\t\t" + article[1] + "\t\t" + article[2] + "\t\t" + article[4]);
+						System.out.println(article.boardNo + "\t\t" + article.title + "\t\t" + article.name + "\t\t" + article.hitCount);
 					}
 				}
 			} else if (choice.equals("2")) {	//게시글 입력
@@ -41,7 +40,7 @@ public class Board {
 				// 제목, 글쓴이, 내용을 입력 받는다.
 				for (int i = 0; i < board.length; i++) {
 					if (board[i] == null) {	// board 배열의 첫번째로 빈 공간에 아래 명령어들을 실행
-						String[] article = { String.valueOf(saveCountIndex), subject, name, text, "0" };	// 입력받은 값들과 조회수 초기값 0을 배열에 입력
+						Board article = new Board(saveCountIndex, subject, name, text, 0);	// 입력받은 값들과 조회수 초기값 0을 배열에 입력
 						board[i] = article;
 						saveCountIndex++;
 						break;
@@ -51,15 +50,15 @@ public class Board {
 				System.out.print("게시물 번호 : ");	// 보고 싶은 게시글 번호 입력
 				int artNum = Integer.parseInt(scanner.nextLine());	// 번호를 문자열로 입력받아 정수형으로 변환
 				for(int i=0; i<board.length; i++){
-					if(board[i] != null && Integer.parseInt(board[i][0]) == artNum){
-						int count = Integer.parseInt(board[i][4]);	// 조회수의 초기값이 문자열로 저장되있으므로 정수형으로 변형 
+					if(board[i] != null && board[i].boardNo == artNum){
+						int count = board[i].hitCount;	// 조회수의 초기값이 문자열로 저장되있으므로 정수형으로 변형 
 						count++;	// 조회수 증가
-						board[i][4] = String.valueOf(count);	// 배열에 문자열로 입력해야 하기 때문에 문자열로 변환
+						board[i].hitCount = count;	// 배열에 문자열로 입력해야 하기 때문에 문자열로 변환
 						System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-						System.out.println("제목 : " + board[i][1] + "\t\t글쓴이 : " + board[i][2] + "\t\t 조회수 : "
-							+ board[i][4]);	//제목, 글쓰이, 조회수 출력
+						System.out.println("제목 : " + board[i].title + "\t\t글쓴이 : " + board[i].name + "\t\t 조회수 : "
+							+ board[i].hitCount);	//제목, 글쓰이, 조회수 출력
 						System.out.println("");
-						System.out.println(board[i][3]);	// 게시글 내용 출력
+						System.out.println(board[i].content);	// 게시글 내용 출력
 						System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 					}
 				}
@@ -69,19 +68,19 @@ public class Board {
 				
 				if (board[artNum] != null) {	// 입력한 게시글이 비어있지 않은 경우
 					System.out.print("제목 : ");
-					String subject = scanner.nextLine();
+					String title = scanner.nextLine();
 					System.out.print("글쓴이 : ");
 					String name = scanner.nextLine();
 					System.out.print("내용 : ");
-					String text = scanner.nextLine();
+					String content = scanner.nextLine();
 				
-					board[artNum][1] = subject;
-					board[artNum][2] = name;
-					board[artNum][3] = text;
+					board[artNum].title = title;
+					board[artNum].name = name;
+					board[artNum].content = content;
 					// 입력받은 제목, 글쓴이, 내용을 덮어 씌운다
 				}else{
 					System.out.println("수정할 게시물이 없습니다.");
-				}
+				}	
 				
 				
 			} else if (choice.equals("5")) {
@@ -91,7 +90,7 @@ public class Board {
 				
 				for(int i=0; i<board.length; i++){
 					if(board[i] != null){
-						if(Integer.parseInt(board[i][0]) == deleteNum){
+						if(board[i].boardNo == deleteNum){
 							board[i] = null;	// 해당 게시물을 null 처리 하여 비운다.
 							System.out.println(deleteNum + "번 게시물이 삭제되었습니다.");
 							for(int k=0; k<board.length-1; k++){
