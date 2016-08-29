@@ -18,5 +18,4 @@ public class C {
 		a.field = 10;
 		a.method();*/
 	}
-
 }
