@@ -27,7 +27,7 @@ public class BoardExample {
 				System.out.println("*********************************************************");
 				for (Board article : board) {	// article 배열 선언 후 board 길이만큼 반복
 					if (article != null) {	// article이 비어있지 않은 경우만 실행
-						System.out.println(article.boardNo + "\t\t" + article.title + "\t\t" + article.name + "\t\t" + article.hitCount);
+						System.out.println(article.getBoardNo() + "\t\t" + article.getTitle() + "\t\t" + article.getName() + "\t\t" + article.getHitCount());
 					}
 				}
 			} else if (choice.equals("2")) {	//게시글 입력
@@ -50,38 +50,44 @@ public class BoardExample {
 				System.out.print("게시물 번호 : ");	// 보고 싶은 게시글 번호 입력
 				int artNum = Integer.parseInt(scanner.nextLine());	// 번호를 문자열로 입력받아 정수형으로 변환
 				for(int i=0; i<board.length; i++){
-					if(board[i] != null && board[i].boardNo == artNum){
-						int count = board[i].hitCount;	// 조회수의 초기값이 문자열로 저장되있으므로 정수형으로 변형 
+					if(board[i] != null && board[i].getBoardNo() == artNum){
+						int count = board[i].getHitCount();	// 조회수의 초기값이 문자열로 저장되있으므로 정수형으로 변형 
 						count++;	// 조회수 증가
-						board[i].hitCount = count;	// 배열에 문자열로 입력해야 하기 때문에 문자열로 변환
+						board[i].setHitCount(count);	// 배열에 문자열로 입력해야 하기 때문에 문자열로 변환
 						System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-						System.out.println("제목 : " + board[i].title + "\t\t글쓴이 : " + board[i].name + "\t\t 조회수 : "
-							+ board[i].hitCount);	//제목, 글쓰이, 조회수 출력
+						System.out.println("제목 : " + board[i].getTitle() + "\t\t글쓴이 : " + board[i].getName() + "\t\t 조회수 : "
+							+ board[i].getHitCount());	//제목, 글쓰이, 조회수 출력
 						System.out.println("");
-						System.out.println(board[i].content);	// 게시글 내용 출력
+						System.out.println(board[i].getContent());	// 게시글 내용 출력
 						System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+					}else{
+						System.out.println("게시물이 없습니다.");
+						break;
 					}
 				}
 			} else if (choice.equals("4")) {
 				System.out.print("수정할 게시물 번호 : ");
 				int artNum = Integer.parseInt(scanner.nextLine());
 				
-				if (board[artNum] != null) {	// 입력한 게시글이 비어있지 않은 경우
-					System.out.print("제목 : ");
-					String title = scanner.nextLine();
-					System.out.print("글쓴이 : ");
-					String name = scanner.nextLine();
-					System.out.print("내용 : ");
-					String content = scanner.nextLine();
+				for(int i=0; i<board.length; i++){
+					if(board[i] != null && board[i].getBoardNo() == artNum){	// 입력한 게시글이 비어있지 않은 경우
+						System.out.print("제목 : ");
+						String title = scanner.nextLine();
+						System.out.print("글쓴이 : ");
+						String name = scanner.nextLine();
+						System.out.print("내용 : ");
+						String content = scanner.nextLine();
 				
-					board[artNum].title = title;
-					board[artNum].name = name;
-					board[artNum].content = content;
+						board[artNum].setTitle(title);
+						board[artNum].setName(name);
+						board[artNum].setContent(content);
 					// 입력받은 제목, 글쓴이, 내용을 덮어 씌운다
-				}else{
-					System.out.println("수정할 게시물이 없습니다.");
-				}	
-				
+					
+					}else{
+						System.out.println("수정할 게시물이 없습니다.");
+						break;
+					}	
+				}
 				
 			} else if (choice.equals("5")) {
 				boolean sw = false;
@@ -90,7 +96,7 @@ public class BoardExample {
 				
 				for(int i=0; i<board.length; i++){
 					if(board[i] != null){
-						if(board[i].boardNo == deleteNum){
+						if(board[i].getBoardNo() == deleteNum){
 							board[i] = null;	// 해당 게시물을 null 처리 하여 비운다.
 							System.out.println(deleteNum + "번 게시물이 삭제되었습니다.");
 							for(int k=0; k<board.length-1; k++){
@@ -100,13 +106,12 @@ public class BoardExample {
 								}
 							}
 							sw = true;
-						}	
+						}else{
+							System.out.println("삭제할 게시물이 없습니다.");
+							break;
+						}
 					}
-				}
-				if(sw == false){
-					System.out.println("삭제할 게시물이 없습니다.");
-				}
-				
+				}				
 			} else if (choice.equals("6")) {	// 반복문을 빠져나온다.
 				break;
 			}
