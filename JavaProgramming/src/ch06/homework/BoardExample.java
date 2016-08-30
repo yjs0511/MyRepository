@@ -90,26 +90,22 @@ public class BoardExample {
 				}
 				
 			} else if (choice.equals("5")) {
-				boolean sw = false;
 				System.out.print("삭제할 게시물 번호 : ");
 				int deleteNum = Integer.parseInt(scanner.nextLine());
 				
 				for(int i=0; i<board.length; i++){
-					if(board[i] != null){
-						if(board[i].getBoardNo() == deleteNum){
-							board[i] = null;	// 해당 게시물을 null 처리 하여 비운다.
-							System.out.println(deleteNum + "번 게시물이 삭제되었습니다.");
-							for(int k=0; k<board.length-1; k++){
-								if(board[k] == null){
-									board[k] = board[k+1];
-									board[k+1] = null;
-								}
+					if(board[i] != null && board[i].getBoardNo() == deleteNum){
+						board[i] = null;	// 해당 게시물을 null 처리 하여 비운다.
+						System.out.println(deleteNum + "번 게시물이 삭제되었습니다.");
+						for(int k=0; k<board.length-1; k++){
+							if(board[k] == null){
+								board[k] = board[k+1];
+								board[k+1] = null;
 							}
-							sw = true;
-						}else{
-							System.out.println("삭제할 게시물이 없습니다.");
-							break;
 						}
+					}else{
+						System.out.println("삭제할 게시물이 없습니다.");
+						break;
 					}
 				}				
 			} else if (choice.equals("6")) {	// 반복문을 빠져나온다.

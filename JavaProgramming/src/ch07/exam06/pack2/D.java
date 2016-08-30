@@ -7,7 +7,6 @@ public class D extends A {
 	//A a = new A();	// 이건 상속받아온 게 아니다.
 						// default의 특성 때문에 안됨
 	
-	
 	//constructor
 	D(){
 		/*A a = new A();	// 상속받아 온 거 아님
