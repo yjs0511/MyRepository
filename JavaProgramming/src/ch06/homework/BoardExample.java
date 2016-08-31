@@ -88,7 +88,6 @@ public class BoardExample {
 						break;
 					}	
 				}
-				
 			} else if (choice.equals("5")) {
 				System.out.print("삭제할 게시물 번호 : ");
 				int deleteNum = Integer.parseInt(scanner.nextLine());
@@ -113,7 +112,5 @@ public class BoardExample {
 			}
 		}
 		System.out.println("프로그램을 종료합니다.");
-
 	}
-
 }
