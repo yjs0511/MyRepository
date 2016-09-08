@@ -19,7 +19,6 @@ public class BeepPrintExample2 {
 					} catch (InterruptedException e) {	}
 				}
 			}
-			
 		});
 		
 		thread.start();
@@ -28,7 +27,6 @@ public class BeepPrintExample2 {
 			System.out.println("띵");
 			System.out.println("출력: "+Thread.currentThread().getName());
 			try {
-				
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
 			}

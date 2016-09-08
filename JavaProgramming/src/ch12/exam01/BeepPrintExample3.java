@@ -19,7 +19,6 @@ public class BeepPrintExample3 {
 					} catch (InterruptedException e) {	}
 				}
 			}
-			
 		});
 		thread.setName("SoundThread");
 		thread.start();

@@ -1,4 +1,4 @@
-package ch12.exam14;
+package ch12.exam13;
 
 public class ThreadGroupExample2 {
 
