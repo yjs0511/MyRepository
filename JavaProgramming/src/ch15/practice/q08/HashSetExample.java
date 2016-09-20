@@ -1,4 +1,4 @@
-package ch15.practice.q8;
+package ch15.practice.q08;
 
 import java.util.HashSet;
 import java.util.Iterator;

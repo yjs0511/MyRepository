@@ -1,4 +1,4 @@
-package ch15.practice.q8;
+package ch15.practice.q08;
 
 public class Student {
 	public int studentNum;

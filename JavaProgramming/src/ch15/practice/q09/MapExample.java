@@ -1,4 +1,4 @@
-package ch15.practice.q9;
+package ch15.practice.q09;
 
 import java.util.HashMap;
 import java.util.Map;

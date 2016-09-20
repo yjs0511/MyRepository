@@ -1,4 +1,4 @@
-package ch15.practice.q7;
+package ch15.practice.q07;
 
 public class Board {
 	private String title;
