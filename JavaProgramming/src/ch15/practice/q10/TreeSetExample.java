@@ -8,5 +8,4 @@ public class TreeSetExample {
 		TreeSet<Student> treeSet = new TreeSet<Student>();
 		treeSet.add(new Student("blue", 96));
 	}
-
 }
