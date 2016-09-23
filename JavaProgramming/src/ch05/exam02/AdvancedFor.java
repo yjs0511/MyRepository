@@ -1,7 +1,5 @@
 package ch05.exam02;
 
-import java.util.jar.Attributes.Name;
-
 public class AdvancedFor {
 
 	public static void main(String[] args) {

@@ -14,8 +14,9 @@ public class ServerExample {
 
 			// 서버의 특정 IP로 접근할 수 있도록 한 것
 			/*
-			 * serverSocket = new ServerSocket(); SocketAddress sa = new
-			 * InetSocketAddress("198.168.0.34", 5001); serverSocket.bind(sa);
+			 * serverSocket = new ServerSocket(); 
+			 * SocketAddress sa = new InetSocketAddress("198.168.0.34", 5001); 
+			 * serverSocket.bind(sa);
 			 */
 
 			// 클라이언트의 연결을 수락하고 통신용 Socket을 생성

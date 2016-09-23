@@ -1,7 +1,6 @@
 package ch06.exam15.pack1;
 
-import ch06.exam15.pack1.*;
-import ch06.exam15.pack2.*;
+import ch06.exam15.pack2.B;
 
 public class C {
 	A a = new A();

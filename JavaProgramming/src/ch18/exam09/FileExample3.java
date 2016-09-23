@@ -2,7 +2,6 @@ package ch18.exam09;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 
 public class FileExample3 {
 

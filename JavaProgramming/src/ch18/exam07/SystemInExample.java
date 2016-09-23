@@ -2,7 +2,6 @@ package ch18.exam07;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
 
 public class SystemInExample {
 
