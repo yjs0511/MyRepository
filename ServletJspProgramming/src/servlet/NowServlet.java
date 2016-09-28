@@ -30,8 +30,8 @@ public class NowServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8");	// response 객체에서 응답 http의 Content-Type과 charset을 설정한다.
-																// 띄어 쓰기 ;뒤에는 해도 되고 안해도 되지만 나머지는 절대 하면 안된다!!!!!!
-		//OutputStream os = response.getOutputStream();	//문자 및 다른 여러 데이터를 보낼 때
+																// 띄어 쓰기는 ;(세미콜론)뒤에 해도 되고 안해도 되지만 나머지는 절대 하면 안된다!!!!!!
+		//OutputStream os = response.getOutputStream();	//문자 및 다른 여러 데이터를 보낼 때(OutputStream)
 		PrintWriter out = response.getWriter();	// 출력 메소드를 사용하기 위함	// 문자만 보낼 때
 		
 		out.println("<html>");
