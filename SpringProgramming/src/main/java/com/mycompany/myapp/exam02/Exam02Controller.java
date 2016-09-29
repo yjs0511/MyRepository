@@ -71,7 +71,7 @@ public class Exam02Controller {
 			@RequestParam(defaultValue="1")int bno, 
 			String title, String content, 
 			@RequestParam(defaultValue="0") int hitCount){
-		// 원래느 스프링 프레임워크가 자동으로 int로 바꿔주지만 바꿔줄 값 자체가 없을 경우 디폴트 값을 줄 수 있다. 기본값을 1로 지정
+		// 원래는 스프링 프레임워크가 자동으로 int로 바꿔주지만 바꿔줄 값 자체가 없을 경우 디폴트 값을 줄 수 있다. 기본값을 1로 지정
 		// 요청 파라미터 값이 넘어오지 않았을 때만 디폴트 값이 넘어옴
 		logger.info("writer 요청 처리");
 		logger.info("bno: "+bno);
