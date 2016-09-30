@@ -8,6 +8,20 @@
 		 네임 스페이스 선언-> 디폴트 네임 스페이스(:접두사 없는 것) 선언을 찾아야 한다 그게 마크업 언어 이름이다.
 		 마크업 언어의 위치는 schemaLocation에 있다 ~.xsd에 마크업 언어의 설정 내용이 담겨있다 에디터는 이 내용을 참고하여
 		 아래 태그들의 내용들이 올바른지 확인한다. -->
+		 
+		 <filter>
+		 	<filter-name>encodingFilter</filter-name> <!-- 여긴 마음대로 써도 된다 -->
+		 	<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		 	<init-param>
+		 		<param-name>encoding</param-name>	<!-- 이건 마음대로 바꾸면 안된다 (파라미터 초기화할 때 이 값을 참조) -->
+		 		<param-value>UTF-8</param-value>
+		 	</init-param>
+		 </filter>
+		 
+		 <filter-mapping>
+		 	<filter-name>encodingFilter</filter-name>
+		 	<url-pattern>/*</url-pattern>	<!-- 클라이언트가 어떤 요청을 하든 필터를 실행한다 -->
+		 </filter-mapping>
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
