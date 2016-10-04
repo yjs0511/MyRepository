@@ -34,8 +34,9 @@ public class Exam05Controller {
 	}
 
 	@RequestMapping("/index3")
-	public void index3(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		logger.info("index2 요청 처리");
+	public void index3(HttpServletRequest request, HttpServletResponse response) throws IOException {	// void를 사용하는 경우는 JSP로 작업하지 않는 경우
+																										// 간단한 데이터는 void 사용
+		logger.info("index3 요청 처리");
 		response.setContentType("image/jpeg");
 		
 		//String filePath = request.getRealPath("webapp/image/photo1.jpg");	// 검은 막대기는 기왕이면 쓰지 말라는 뜻

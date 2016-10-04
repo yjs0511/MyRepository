@@ -7,7 +7,7 @@
 	<body>
 		Exam05
 		<hr/>
-		1. <a href="/myapp/exam05/index2">String 리턴</a> <br>
+		1. <a href="/myapp/exam05/index">String 리턴</a> <br>
 		2. <a href="/myapp/exam05/index2">ModelAndView 리턴</a> <br>
 		3. <a href="/myapp/exam05/index3">void 리턴</a> <br>
 	</body>

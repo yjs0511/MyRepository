@@ -17,6 +17,7 @@
 		 <a href="/myapp/exam04/board">게시판</a><br>
 		5. <a href="/myapp/exam05/index">Exam05</a>: 요청 처리 메소드의 리턴 타입<br>
 		6. <a href="/myapp/exam06/index">Exam06</a>: 요청 처리 메소드 매개 변수 타입<br>
+		7. <a href="/myapp/exam07/index">Exam07</a>: 컨트롤러에서 JSP로 데이터 객체 전달<br>
 		
 		
 	</body>
