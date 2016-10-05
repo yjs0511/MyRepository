@@ -10,6 +10,7 @@
 		1) 개별 파라미터 값을 받을 수 있는 변수 선언 <br/>
 		2) @RequestParam 어노테이션 <br/>
 		3) 커맨드 객체(파라미터 값을 객체로 받을 수 있도록 선언) 선언 <br/>
+		4) <a href="/myproject/exam06/method1?mid=xxx&mname=yyy">HttpServletRequest 변수 선언</a>
 		
 	</body>
 </html>
