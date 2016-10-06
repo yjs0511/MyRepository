@@ -7,7 +7,7 @@
 	<body>
 		[게시물 쓰기]<br/>
 		<form method="post" action="/myproject/exam04/write">
-			 제   목    :<input type="text"><br/>
+			 제   목    :<input type="text" name="btitle"><br/>
 			내용 : <textarea rows="5" cols="20" name="bcontent"></textarea> <br/>
 			
 		

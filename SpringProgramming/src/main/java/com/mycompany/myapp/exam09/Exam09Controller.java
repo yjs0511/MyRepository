@@ -16,7 +16,6 @@ public class Exam09Controller {
 		logger.info("setA() 실행");
 	}
 	
-
 	private B b;
 	
 	public void setB(B b) {
