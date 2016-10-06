@@ -13,6 +13,7 @@
 	4. <a href="/myproject/exam04/index">Exam04</a> : 요청 방식별 처리<br/>
 	5. <a href="/myproject/exam05/index">Exam05</a> : 요청 처리 메소드의 리턴 타입<br/>
 	6. <a href="/myproject/exam06/index">Exam06</a> : 요청 처리 메소드 매개 변수 타입<br/>
+	7. <a href="/myproject/exam07/index">Exam07</a> : 컨트롤러에서 JSP로 데이터 객체 전달<br/>
 	
 </body>
 </html>
