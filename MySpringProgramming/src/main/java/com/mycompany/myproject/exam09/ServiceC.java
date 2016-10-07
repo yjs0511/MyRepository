@@ -1,6 +1,8 @@
-package com.mycompany.myapp.exam09;
+package com.mycompany.myproject.exam09;
 
 public interface ServiceC {
 	public void method();
+	
+
 	
 }

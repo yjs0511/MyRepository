@@ -25,8 +25,44 @@
 	
 	<beans:bean name="aObj" class="com.mycompany.myproject.exam09.A"/>
 	
-	<beans:bean>
+	<beans:bean name="bObj" class="com.mycompany.myproject.exam09.B"/>
 	
+	<beans:bean name="serviceAObj" class="com.mycompany.myproject.exam09.ServiceA"/>
+	
+	<beans:bean name="serviceBObj" class="com.mycompany.myproject.exam09.ServiceB"/>
+	
+	<beans:bean name="serviceCImpl" class="com.mycompany.myproject.exam09.ServiceCImpl"/>
+	
+	<beans:bean name="serviceDImpl" class="com.mycompany.myproject.exam09.ServiceDImpl"/>
+	
+	<beans:bean name="c" class="com.mycompany.myproject.exam09.C">
+		<beans:constructor-arg ref="d"></beans:constructor-arg>
+	</beans:bean>
+	
+	<beans:bean name="d" class="com.mycompany.myproject.exam09.D"/>
+	
+	<beans:bean name="e" class="com.mycompany.myproject.exam09.E">
+		<beans:constructor-arg ref="bObj"></beans:constructor-arg>
+		<beans:constructor-arg ref="d"></beans:constructor-arg>
+	</beans:bean>
+	
+	<beans:bean name="f" class="com.mycompany.myproject.exam09.F">
+		<beans:constructor-arg ref="serviceAObj"/>
+		<beans:constructor-arg ref="serviceBObj"/>
+		<beans:constructor-arg ref="serviceCImpl"/>
+	</beans:bean>
+	
+	
+	<beans:bean name="exam09Controller" class="com.mycompany.myproject.exam09.Exam09Controller">
+		<beans:property name="a" ref="aObj"/>
+		<beans:property name="b" ref="bObj"/>
+		<beans:property name="serviceA" ref="serviceAObj"/>
+		<beans:property name="serviceB" ref="serviceBObj"/>
+		<beans:property name="serviceC" ref="serviceCImpl"/>
+		<beans:property name="serviceD" ref="serviceDImpl"/>
+		<beans:property name="c" ref="c"/>
+		<beans:property name="e" ref="e"/>
+		<beans:property name="f" ref="f"/>
 	</beans:bean>
 	
 	

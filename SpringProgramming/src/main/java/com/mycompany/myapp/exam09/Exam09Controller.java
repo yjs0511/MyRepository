@@ -50,8 +50,32 @@ public class Exam09Controller {
 		logger.info("setServiceD() 실행");
 		this.serviceD = serviceD;
 	}
+	
+	private C c;
+	public void setC(C c){
+		logger.info("setC() 실행");
+		this.c = c;
+	}
 
-	public Exam09Controller(){
+	/*public Exam09Controller(C c){	// 스프링에선 기본 생성자만 가지고 객체를 만든다.	-> 생성자가 매개변수를 받게되면 예외가 발생한다
+	 * 									컨트롤러에선 기본 생성자를 만들지 못한다. 세터 주입만 가능
+		logger.info("Exam09Controller 객체 생성");
+		this.c = c;	
+	}*/
+	
+	private E e;
+	public void setE(E e) {
+		this.e = e;
+		logger.info("setE() 실행");
+	}
+	
+	private F f;
+	public void setF(F f){
+		this.f = f;
+		logger.info("setF() 실행");
+	}
+
+	public Exam09Controller(){	
 		logger.info("Exam09Controller 객체 생성");
 	}
 	
@@ -70,6 +94,16 @@ public class Exam09Controller {
 		serviceB.method();
 		serviceC.method();
 		serviceD.method();
+		return "redirect:/exam09/index";
+	}
+	
+	@RequestMapping("/method2")
+	public String method2(){
+		logger.info("method2 처리");
+
+		c.method();
+		e.method();
+		f.method();
 		return "redirect:/exam09/index";
 	}
 }
