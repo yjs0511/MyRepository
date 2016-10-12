@@ -20,9 +20,8 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">	<!-- 이게 없으면 jsp파일을 못 찾는다. -->
-		<beans:property name="prefix" value="/WEB-INF/views/" />
+	<beans:bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">	<!-- 이게 없으면 jsp파일을 못 찾는다. / beans:bean 태그는 스프링 관리 객체를 만들어준다-->
+		<beans:property name="prefix" value="/WEB-INF/views/" />							<!-- InternalResourceViewResolver는 내부 요소를 완전한 객체로 만들어준다???? -->
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
@@ -77,7 +76,7 @@
 		<beans:property name="Setter 이름" ref="매개값으로 전달할 객체(관리객체 이름)"></beans:property>
 		-->
 		<beans:property name="b" ref="bObj"/>				<!-- property는 setter 주입을 하라는 뜻 (B()의 매개변수에 무엇을 넣을것인가) / name속성에는 setter 메소드의 이름이 set을 빼고 첫자가 소문자가 되어 나온다 (그래서 b만 나옴) -->
-															<!-- ref 에는 위에 관리 객체로 만들어준 b가 들어간다. -->
+															<!-- ref 에는 위에 관리 객체로 만들어준 b가 들어간다. value 면 값이 들어가고 ref 면 객체가 들어간다 -->
 		<beans:property name="a" ref="aObj"/>
 		
 		<beans:property name="serviceA" ref="serviceAObj"/>		
