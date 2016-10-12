@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />	<!-- 어노테이션을 사용해서 객체의 역할을 부여하겠다 -->
+							<!-- 이게 있어야만 패키지 안에서 어노테이션을 통해 컨트롤러를 찾을 수 있다. -->
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />	<!-- URL로 접근 가능한 위치를 매핑, 이게 있으면 DispatcherServlet을 거치지 않고 바로 resources 폴더로 간다-->
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">	<!-- 이게 없으면 jsp파일을 못 찾는다. / beans:bean 태그는 스프링 관리 객체를 만들어준다-->
+		<beans:property name="prefix" value="/WEB-INF/views/" />							<!-- InternalResourceViewResolver는 내부 요소를 완전한 객체로 만들어준다???? -->
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+
+	<context:component-scan base-package="com.mycompany.myapp" />	<!-- 컴포넌트(스프링이 관리해야할 객체/ ex.컨트롤러)를 지정한 패키지 내 어디에 있든 하나 하나 다 찾아서 사용하겠다 -->
+																	<!-- 어노테이션을 통해 컴포넌트인지 아닌지 구분한다(@Controller가 붙은 놈은 다 찾는다) -->
+																	<!-- 반드시 저 패키지 안에 있어야만 찾을 수 있다. -->
+	<!-- B를 관리 객체로 생성 -->
+	<beans:bean name="bObj" class="com.mycompany.myapp.exam09.B"/>		<!-- 시작과 끝이 한 태그에서 이루어 지면 시작 태그 끝에 /만 붙이고 끝 태그 없애라 -->
+	
+	<!-- A를 관리 객체로 생성 -->
+	<beans:bean name="aObj" class="com.mycompany.myapp.exam09.A"/>	
+	
+	<!-- ServiceA를 관리 객체로 생성 -->
+	<beans:bean name="serviceAObj" class="com.mycompany.myapp.exam09.ServiceA"/>	
+	
+	<!-- ServiceB를 관리 객체로 생성 -->
+	<beans:bean name="serviceBObj" class="com.mycompany.myapp.exam09.ServiceB"/>
+	
+	<!-- ServiceCImpl1를 관리 객체로 생성 -->
+	<beans:bean name="serviceCImpl1" class="com.mycompany.myapp.exam09.ServiceCImpl1"/>
+	
+	<!-- ServiceDImpl2를 관리 객체로 생성 -->
+	<beans:bean name="serviceDImpl" class="com.mycompany.myapp.exam09.ServiceDImpl2"/>
+	
+	<!-- C를 관리 객체로 생성 -->
+	<beans:bean name="c" class="com.mycompany.myapp.exam09.C">		<!-- 스프링은 기본 생성자를 가지고 관리 객체를 만든다 (기본 생성자 안 쓰면 예외 발생) -->
+		<beans:constructor-arg ref="d"/>							<!-- C 생성자의 매개변수로 D 객체(관리객체)를 넣어줌 -->
+	</beans:bean>
+	
+	<!-- D를 관리 객체로 생성 -->
+	<beans:bean name="d" class="com.mycompany.myapp.exam09.D"/>
+	
+	<!-- E를 관리 객체로 생성 -->
+	<beans:bean name="e" class="com.mycompany.myapp.exam09.E">
+		<beans:constructor-arg ref="bObj"/>
+		<beans:constructor-arg ref="d"/>
+	</beans:bean>
+	
+	<!-- F를 관리 객체로 생성 -->
+	<beans:bean name="f" class="com.mycompany.myapp.exam09.F">
+		<beans:constructor-arg ref="serviceAObj"/>
+		<beans:constructor-arg ref="serviceBObj"/>
+		<beans:constructor-arg ref="serviceCImpl1"/>
+		
+	</beans:bean>
+	
+	
+	
+	<!-- Exam09Controller 컨트롤러 객체(관리 객체[@가 붙으면 스프링이 객체를 만들어준다])를 찾아서 가져오기 -->
+	<beans:bean name="exam09Controller" class="com.mycompany.myapp.exam09.Exam09Controller">	<!-- 이미 객체가 만들어져 있다면 찾아온다 -->
+		<!-- Setter 주입 
+		<beans:property name="Setter 이름" ref="매개값으로 전달할 객체(관리객체 이름)"></beans:property>
+		-->
+		<beans:property name="b" ref="bObj"/>				<!-- property는 setter 주입을 하라는 뜻 (B()의 매개변수에 무엇을 넣을것인가) / name속성에는 setter 메소드의 이름이 set을 빼고 첫자가 소문자가 되어 나온다 (그래서 b만 나옴) -->
+															<!-- ref 에는 위에 관리 객체로 만들어준 b가 들어간다. value 면 값이 들어가고 ref 면 객체가 들어간다 -->
+		<beans:property name="a" ref="aObj"/>
+		
+		<beans:property name="serviceA" ref="serviceAObj"/>		
+				
+		<beans:property name="serviceB" ref="serviceBObj"/>			
+		
+		<beans:property name="serviceC" ref="serviceCImpl1"/>		
+		
+		<beans:property name="serviceD" ref="serviceDImpl"/>	
+		
+		<beans:property name="c" ref="c"/>	
+		
+		<beans:property name="e" ref="e"/>	
+		
+		<beans:property name="f" ref="f"/>			
+	</beans:bean>
+		
+</beans:beans>
