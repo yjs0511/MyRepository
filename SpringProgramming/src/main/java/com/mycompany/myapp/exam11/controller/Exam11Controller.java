@@ -21,7 +21,8 @@ import com.mycompany.myapp.exam11.service.Exam11MemberService;
 public class Exam11Controller {
 	private static final Logger logger = LoggerFactory.getLogger(Exam11Controller.class);
 	
-	@Autowired
+	@Autowired	// 필드, 생성자, setter 주입 다 가능
+	// @Resource 는 setter 주입만 가능
 	private Exam11MemberService memberService;
 	
 	@Autowired
@@ -108,8 +109,36 @@ public class Exam11Controller {
 		logger.info("boardList 처리");
 		List<Board> list = boardService.getList();
 		model.addAttribute("boardList", list);
-				
 		return "exam11/boardList";
 	}
 	
+	@RequestMapping("/boardView")
+	public String boardView(int bno, Model model){	// 매개변수 bno가 확실히 넘어올 수 있도록 보장해줘야 한다. 예외 발생을 방지하려면... (int형으로 변환해 줘야 한다.)
+		Board board = boardService.getBoard(bno);
+		model.addAttribute("board", board);	//JSP 에서 표현식으로 board라는 이름으로 데이터에 접근 
+		logger.info("boardView 처리");
+		return "exam11/boardView";
+	}
+	
+	@RequestMapping(value="/boardUpdate", method=RequestMethod.GET)
+	public String boardUpdateForm(int bno, Model model){	// 매개변수 bno가 확실히 넘어올 수 있도록 보장해줘야 한다. 예외 발생을 방지하려면... (int형으로 변환해 줘야 한다.)
+		logger.info("boardUpdateForm 처리");
+		Board board = boardService.getBoard(bno);
+		model.addAttribute("board", board);	//JSP 에서 표현식으로 board라는 이름으로 데이터에 접근 
+		return "exam11/boardUpdateForm";
+	}
+	
+	@RequestMapping(value="/boardUpdate", method=RequestMethod.POST)
+	public String boardUpdate(Board board){	
+		logger.info("boardUpdate 처리");
+		boardService.updateBoard(board);
+		return "redirect:/exam11/boardList";
+	}
+	
+	@RequestMapping("/boardDelete")
+	public String boardDelete(int bno){	
+		logger.info("boardDelete 처리");
+		boardService.deleteBoard(bno);
+		return "redirect:/exam11/boardList";
+	}
 }

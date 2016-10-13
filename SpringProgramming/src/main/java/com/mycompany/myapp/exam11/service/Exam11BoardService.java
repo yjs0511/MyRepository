@@ -22,12 +22,27 @@ public class Exam11BoardService {
 		boardDao.insert(board);
 	}
 	
-	@Autowired
 	public List<Board> getList(){
 		
 		logger.info("getList 처리");
 		List<Board> list = boardDao.selectList();
 		return list;
+	}
+	
+	public Board getBoard(int bno){
+		logger.info("getBoard 처리");
+		Board board = boardDao.selectBoard(bno);
+		return board;
+	}
+	
+	public void updateBoard(Board board){
+		logger.info("updateBoard 처리");
+		boardDao.update(board);
+	}
+	
+	public void deleteBoard(int bno){
+		logger.info("deleteBoard 처리");
+		boardDao.delete(bno);
 	}
 	
 }
