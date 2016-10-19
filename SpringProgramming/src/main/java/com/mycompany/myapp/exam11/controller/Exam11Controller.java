@@ -32,7 +32,6 @@ public class Exam11Controller {
 		this.exam11MemberService = exam11MemberService;
 	}*/
 
-
 	@RequestMapping("/index")
 	public String index(){
 		logger.info("index 처리");
