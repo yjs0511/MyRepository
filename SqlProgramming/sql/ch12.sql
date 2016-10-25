@@ -34,6 +34,6 @@ select rn, bno, btitle
 from (
   select rownum as rn, bno, btitle 
   from (select bno, btitle from board order by bno desc)
-  where rownum<=(2*10)
+  where rownum<=(1*10)
 )
-where rn>=((2-1)*10+1);
+where rn>=((1-1)*9+1);

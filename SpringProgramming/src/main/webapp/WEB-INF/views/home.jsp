@@ -25,8 +25,7 @@
 		10. <a href="/myapp/exam10/index">Exam10</a> : 의존성 주입(DI): 어노테이션 이용<br/>
 		11. <a href="/myapp/exam11/index">Exam11</a> : 서비스 계층과 데이터(퍼시스턴스) 계층<br/>
 		12. <a href="/myapp/exam12/index">Exam12</a> : 커넥션 풀 설정<br/>
-		
-		
+		13. <a href="/myapp/exam13/index">Exam13</a> : jdbcTemplate을 이용한 DAO <br/><br/>
 		
 	</body>
 </html>

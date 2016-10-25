@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jee="http://www.springframework.org/schema/jee"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.3.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -94,15 +96,21 @@
 		<beans:property name="f" ref="f"/>			
 	</beans:bean>
 	
-	<!-- Connection Pool -->
-	<beans:bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">	<!-- 커넥션 풀을 만들기 위한 클래스는 스프링에서 제공하지 않는다. 외부에서 받아와야 한다. -->
-		<beans:property name="driverClass" value="oracle.jdbc.OracleDriver"/>	<!-- jdbc 드라이버 등록 -->
-		<beans:property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"/>	<!-- 연결 문자열 및 포트번호, 디비이름 -->
+	<!-- Connection Pool -->																<!-- 어플리케이션 내에서 커넥션 풀 만드는 방법 (외부 톰캣(was)에사 사용하려면 이 방법 쓰면 안됨) -->
+	<beans:bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">		<!-- 커넥션 풀을 만들기 위한 클래스는 스프링에서 제공하지 않는다. 외부에서 받아와야 한다. -->
+		<beans:property name="driverClass" value="oracle.jdbc.OracleDriver"/>				<!-- jdbc 드라이버 등록 -->
+		<beans:property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"/>		<!-- 연결 문자열 및 포트번호, 디비이름 -->
 		<beans:property name="user" value="tester1"/>	
 		<beans:property name="password" value="kosa12345"/>
 		<beans:property name="maxPoolSize" value="3"/>	<!-- 최대 풀 사이즈 -->
 		<beans:property name="initialPoolSize" value="1"/>	<!-- 초기 풀 사이즈 -->
 		<beans:property name="acquireIncrement" value="1"/>	<!-- 초기 사이즈를 넘으면 몇 개씩 증가시킬래? -->
 		<beans:property name="minPoolSize" value="1"/>	<!-- 전혀 사용이 안되는 상황에는 10 만큼만 쓰겠다 -->
-	</beans:bean>
+	</beans:bean> 
+	
+	<!-- <jee:jndi-lookup id="dataSource" jndi-name="jdbc/orcl"/> -->	<!-- name 대신 id 써도 되는데 여기선 id밖에 못씀 -->
+																		<!-- was의 객체를 등록해서 사용하겠다 -->
+	<beans:bean name="JdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:property name="dataSource" ref="dataSource"></beans:property>
+	</beans:bean>																	
 </beans:beans>
