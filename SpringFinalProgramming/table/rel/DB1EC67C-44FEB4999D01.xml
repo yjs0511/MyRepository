@@ -3,7 +3,7 @@
 <createdBy>Administrator</createdBy>
 <createdTime>2016-10-25 09:43:15 UTC</createdTime>
 <ownerDesignName>table</ownerDesignName>
-<shouldBeOpen>false</shouldBeOpen>
+<shouldBeOpen>true</shouldBeOpen>
 <selectedRDBMSSite>32076570-2523-435C-2E92-BF29817DFF70</selectedRDBMSSite>
 <importConnectionStamps>
 <importConnectionStamp class="oracle.dbtools.crest.imports.DBConnectionStamp">
