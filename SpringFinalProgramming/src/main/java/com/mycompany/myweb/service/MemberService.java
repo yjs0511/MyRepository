@@ -1,7 +1,5 @@
 package com.mycompany.myweb.service;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,16 +35,15 @@ public class MemberService {
 								// 스프링에서의 유효성 검사는 이 메소드가 실행하기 전에 한다.
 	}
 	
-	public int login(String mid, String mpassword, HttpSession session){		// 리턴 결과가 세가지인 경우는 리턴 타입을 정해야 한다_성공 or 실패의 경우 2가지(상수로 처리).
+	public int login(String mid, String mpassword){		// 리턴 결과가 세가지인 경우는 리턴 타입을 정해야 한다_성공 or 실패의 경우 2가지(상수로 처리).
 		Member member = memberDao.selectByMid(mid);
 		if(member == null){ return LOGIN_FAIL_MID;}
 		if(member.getMpassword().equals(mpassword) == false){return LOGIN_FAIL_MPASSWORD;}
-		session.setAttribute("login", mid);
 		return LOGIN_SUCCESS;
 	}
 	
-	public int logout(HttpSession session){	// 서비스에선 가급적 HttpSesstion을 사용하지 않는게 좋다 (컨트롤러에서 하는게 좋다) service가 session에 종속되기 때문(session이 없으면 실행이 안된다)
-		session.removeAttribute("login");
+	public int logout(String mid){	// 서비스에선 가급적 HttpSesstion을 사용하지 않는게 좋다 (컨트롤러에서 하는게 좋다) service가 session에 종속되기 때문(session이 없으면 실행이 안된다)
+		
 		return LOGOUT_SUCCESS;
 	}
 	
@@ -61,27 +58,31 @@ public class MemberService {
 		return memberDao.selectByMemail(memail);
 	}
 	
-	public Member info(String mpassword, HttpSession session){
-		String mid = (String) session.getAttribute("login");
+	public Member info(String mid, String mpassword){
 		Member member = memberDao.selectByMid(mid);
 		if(member.getMpassword().equals(mpassword) == false) return null;
 		return member;
 	}
 	
 	public int modify(Member member){	// 되거나 안되거나 (잘못 된 형식 검사는 여기서 하는 거 아님)
-		
+		Member dbMember = memberDao.selectByMid(member.getMid());
+		if(dbMember.getMpassword().equals(member.getMpassword()) == false) return MODIFY_FAIL;
+		int row = memberDao.update(member);
+		if(row != 1) return MODIFY_FAIL;
+		return MODIFY_SUCCESS;
 	}
 	
-	public int withdraw(String mpassword, HttpSession session){	// 성공 or 실패 2가지 (패스워드 틀릴 때, 홈쇼핑의 경우 물건 구매해 놓고 탈퇴하면 안되니까)
-		String mid = (String) session.getAttribute("login");
+	public int withdraw(String mid, String mpassword){	// 성공 or 실패 2가지 (패스워드 틀릴 때, 홈쇼핑의 경우 물건 구매해 놓고 탈퇴하면 안되니까)
 		Member member = memberDao.selectByMid(mid);
 		if(member.getMpassword().equals(mpassword) == false) return WITHDRAW_FAIL_MPASSWORD;
 		memberDao.delete(mid);
-		logout(session);
+		logout(mid);
 		return WITHDRAW_SUCCESS;
 	}
 	
 	public boolean isMid(String mid){
-		
+		Member member = memberDao.selectByMid(mid);
+		if(member == null) return false;
+			return true;
 	}
 }

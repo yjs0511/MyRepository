@@ -27,11 +27,11 @@ public class FreeBoardDao {
 	}
 	
 	public int update(FreeBoard freeBoard){
-		String sql = "update freeboard set btitle=?, bcontent=?, bhitcontent=? where bno=?";
+		String sql = "update freeboard set btitle=?, bcontent=?, bhitcount=? where bno=?";
 		int rowNo = jdbcTemplate.update(sql, 
 										freeBoard.getBtitle(),
 										freeBoard.getBcontent(),
-										freeBoard.getBwriter(),
+										freeBoard.getBhitcount(),
 										freeBoard.getBno()
 				);
 		return rowNo;

@@ -29,7 +29,7 @@
 	<beans:bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">		<!-- 커넥션 풀을 만들기 위한 클래스는 스프링에서 제공하지 않는다. 외부에서 받아와야 한다. -->
 		<beans:property name="driverClass" value="oracle.jdbc.OracleDriver"/>				<!-- jdbc 드라이버 등록 -->
 		<beans:property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"/>		<!-- 연결 문자열 및 포트번호, 디비이름 -->
-		<beans:property name="user" value="tester1"/>	
+		<beans:property name="user" value="final"/>	
 		<beans:property name="password" value="kosa12345"/>
 		<beans:property name="maxPoolSize" value="3"/>	<!-- 최대 풀 사이즈 -->
 		<beans:property name="initialPoolSize" value="1"/>	<!-- 초기 풀 사이즈 -->
