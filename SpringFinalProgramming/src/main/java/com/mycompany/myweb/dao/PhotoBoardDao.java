@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import com.mycompany.myweb.dto.FreeBoard;
 import com.mycompany.myweb.dto.PhotoBoard;
 
 @Component
@@ -31,7 +30,7 @@ public class PhotoBoardDao {
 	}
 	
 	public int update(PhotoBoard photoBoard){
-		String sql = "update photoboard set btitle=?, bcontent=?, bhitcontent=?, originalfile=?, savedfile=?, mimefile=? where bno=?";
+		String sql = "update photoboard set btitle=?, bcontent=?, bwriter=?, originalfile=?, savedfile=?, mimetype=? where bno=?";
 		int rowNo = jdbcTemplate.update(sql, 
 										photoBoard.getBtitle(),
 										photoBoard.getBcontent(),
@@ -63,7 +62,7 @@ public class PhotoBoardDao {
 				photoBoard.setBwriter(rs.getString("bwriter"));
 				photoBoard.setBhitcount(rs.getInt("bhitcount"));
 				photoBoard.setBdate(rs.getDate("bdate"));
-				photoBoard.setOriginalfile(rs.getString("orginalfile"));
+				photoBoard.setOriginalfile(rs.getString("originalfile"));
 				photoBoard.setSavedfile(rs.getString("savedfile"));
 				photoBoard.setMimetype(rs.getString("mimetype"));
 				return photoBoard;
@@ -72,10 +71,10 @@ public class PhotoBoardDao {
 	}
 	
 	public List<PhotoBoard> selectByPage(int pageNo, int rowsPerPage) {
-		String sql = "select rn, bno, btitle, bhitcount, savedfile ";	// 단순히 브라우저 상에 보여주기만 할 거면 savedfile을 쓰는게 낫다 (orginalfile은 다운로드 할 때 사용) 
+		String sql = "select rn, bno, btitle, bhitcount, bdate, savedfile ";	// 단순히 브라우저 상에 보여주기만 할 거면 savedfile을 쓰는게 낫다 (orginalfile은 다운로드 할 때 사용) 
 				sql+="from ( ";
-				sql += "select rownum as rn, bno, btitle, bhitcount, savedfile ";
-				sql+=" from (select bno, btitle, bhitcount, savedfile from photoboard order by bno desc) ";
+				sql += "select rownum as rn, bno, btitle, bhitcount, bdate, savedfile ";
+				sql+=" from (select bno, btitle, bhitcount, bdate, savedfile from photoboard order by bno desc) ";
 				sql+= "where rownum<=? ";
 				sql += ") ";
 				sql += "where rn>=? ";
@@ -90,6 +89,7 @@ public class PhotoBoardDao {
 					photoBoard.setBno(rs.getInt("bno"));
 					photoBoard.setBtitle(rs.getString("btitle"));
 					photoBoard.setBhitcount(rs.getInt("bhitcount"));
+					photoBoard.setBdate(rs.getDate("bdate"));
 					photoBoard.setSavedfile(rs.getString("savedfile"));
 					return photoBoard;
 				}}

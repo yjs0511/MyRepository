@@ -53,8 +53,8 @@
 				<c:if test="${groupNo>1}">
 					<a href="list?pageNo=${startPageNo-1}">[이전]</a>
 				</c:if>
+				&nbsp;
 				<c:forEach var="i" begin="${startPageNo}" end="${endPageNo}">
-					&nbsp;
 					<a href="list?pageNo=${i}" 
 						<c:if test="${pageNo==i}"> style="color:red"</c:if>>${i}
 					</a>
@@ -63,7 +63,7 @@
 			<c:if test="${groupNo<totalGroupNo}">
 					<a href="list?pageNo=${endPageNo+1}">[다음]</a>
 			</c:if>	
-			<a href="list?pageNo=${totalPageNo}">[맨끝]</a>	
+			<a href="list?pageNo=${totalPageNo}">[맨끝]</a>	                                                                                                                                                           
 		</div>
 		
 		

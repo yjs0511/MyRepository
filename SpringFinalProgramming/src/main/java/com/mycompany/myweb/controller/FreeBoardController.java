@@ -22,7 +22,18 @@ public class FreeBoardController {
 	private FreeBoardService freeBoardService;
 	
 	@RequestMapping("/list")
-	public String list(@RequestParam(defaultValue="1") int pageNo, Model model){	// 원래는 String으로 넘어오는데 값이 만약 넘어오지 않는 경우 예외가 발생하므로 초기값을 정해준다. (잘 넘어오면 알아서 타입 변환을 한다)
+	public String list(String pageNo, Model model, HttpSession session){	// 원래는 String으로 넘어오는데 값이 만약 넘어오지 않는 경우 예외가 발생하므로 초기값을 정해준다. (잘 넘어오면 알아서 타입 변환을 한다)
+		int intPageNo = 1;
+		if(pageNo == null){	// pageNO가 null이면 세션에서 찾아보기
+			pageNo = (String) session.getAttribute("pageNo");
+			if(pageNo != null){
+				intPageNo=Integer.parseInt(pageNo);
+			}
+		}else{
+			intPageNo = Integer.parseInt(pageNo);
+		}
+		
+		session.setAttribute("pageNo", String.valueOf(intPageNo));
 		
 		int rowsPerPage = 6;
 		int pagesPerGroup = 10;
@@ -32,15 +43,15 @@ public class FreeBoardController {
 		int totalPageNo = totalBoardNo/rowsPerPage + ((totalBoardNo%rowsPerPage != 0)? 1:0);
 		int totalGroupNo = totalPageNo/pagesPerGroup + ((totalPageNo%pagesPerGroup != 0)? 1:0);
 		
-		int groupNo = (pageNo-1)/pagesPerGroup + 1;
+		int groupNo = (intPageNo-1)/pagesPerGroup + 1;
 		int startPageNo = (groupNo-1)*pagesPerGroup+1;
 		int endPageNo = startPageNo + pagesPerGroup-1;
 		if(groupNo == totalGroupNo){
 			endPageNo = totalPageNo;
 		}
 		
-		List<FreeBoard> list = freeBoardService.list(pageNo, rowsPerPage);
-		model.addAttribute("pageNo", pageNo);
+		List<FreeBoard> list = freeBoardService.list(intPageNo, rowsPerPage);
+		model.addAttribute("pageNo", intPageNo);
 		model.addAttribute("rowsPerPage", rowsPerPage);
 		model.addAttribute("pagesPerGroup", pagesPerGroup);
 		model.addAttribute("totalBoardNo", totalBoardNo);
@@ -93,6 +104,12 @@ public class FreeBoardController {
 		FreeBoard dbBoard = freeBoardService.info(freeBoard.getBno());
 		freeBoard.setBhitcount(dbBoard.getBhitcount());
 		freeBoardService.modify(freeBoard);
+		return "redirect:/freeboard/list";
+	}
+	
+	@RequestMapping("/remove")
+	public String remove(int bno){
+		freeBoardService.remove(bno);
 		return "redirect:/freeboard/list";
 	}
 	
