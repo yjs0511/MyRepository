@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -146,6 +145,49 @@ public class PhotoBoardController {
 		photoBoardService.modify(photoBoard);
 		model.addAttribute("photoboard", photoBoard);
 		return "photoboard/info";
+	}
+	
+	@RequestMapping(value="/modify", method=RequestMethod.GET)
+	public String modifyForm(int bno, Model model){
+		PhotoBoard photoBoard = photoBoardService.info(bno);
+		model.addAttribute("photoboard", photoBoard);
+		return "photoboard/modify";
+	}
+	
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
+	public String modify(PhotoBoard photoBoard, HttpSession session){
+		
+		try{
+			PhotoBoard dbBoard = photoBoardService.info(photoBoard.getBno());
+			photoBoard.setBhitcount(dbBoard.getBhitcount());
+			
+			photoBoard.setOriginalfile(photoBoard.getPhoto().getOriginalFilename());
+			
+			String savedfile = new Date().getTime() + photoBoard.getPhoto().getOriginalFilename();
+			
+			String realpath = session.getServletContext().getRealPath("/WEB-INF/photo/"+savedfile);	// 저장할 파일의 절대 파일 시스템의 경로
+			photoBoard.getPhoto().transferTo(new File(realpath));										// 실제로 파일을 저장하는 코드(파일시스템 경로에 실제 파일을 저장)
+			
+			photoBoard.setSavedfile(savedfile);
+			photoBoard.setMimetype(photoBoard.getPhoto().getContentType());
+			
+			int result = photoBoardService.modify(photoBoard);
+			
+			if(result == PhotoBoardService.WRITE_FAIL){
+				return "photoboard/modify";
+			}else{
+				return "redirect:/photoboard/list";
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return "photoboard/modify";
+		}
+	}
+	
+	@RequestMapping("/remove")
+	public String remove(int bno){
+		photoBoardService.remove(bno);
+		return "redirect:/photoboard/list";
 	}
 	
 	

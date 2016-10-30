@@ -5,22 +5,23 @@
 		<meta charset="UTF-8">
 	</head>
 	<body>
-		글쓰기
+		글수정
 		<hr/>
 		<form method="post" enctype="multipart/form-data">
+			<input type="hidden" name="bno" value="${photoboard.bno}">
 			<table>
 				<tr>
 					<td style="background-color:orange; width:70px">제목</td>
 					<td>
-						<input type="text" name="btitle" style="witdh:600px"> 
+						<input type="text" name="btitle" style="witdh:600px" value="${photoboard.btitle}"> 
 					</td>
 				</tr>
 				<tr>
 					<td style="background-color:orange; width: 70px">내용</td>
 					<td>
-						<textarea name="bcontent" style="width:600px; height:300px">${freeboard.bcontent}</textarea>
+						<textarea name="bcontent" style="width:600px; height:200px">${photoboard.bcontent}</textarea>
 					</td>
-				</tr>
+				</tr> 
 				<tr>
 					<td style="background-color:orange; width: 70px">사진</td>
 					<td>
@@ -28,7 +29,7 @@
 					</td>
 				</tr> 
 			</table>
-			<input type="submit" value="글쓰기">
+			<input type="submit" value="수정">
 		</form>
 	</body>
 </html>

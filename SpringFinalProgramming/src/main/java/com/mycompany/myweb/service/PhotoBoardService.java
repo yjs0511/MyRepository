@@ -27,13 +27,13 @@ public class PhotoBoardService {
 		return photoBoardDao.selectByPage(pageNo, rowsPerPage);
 	}
 
-	public int write(PhotoBoard freeBoard) {
-		int row = photoBoardDao.insert(freeBoard);
+	public int write(PhotoBoard photoBoard) {
+		int row = photoBoardDao.insert(photoBoard);
 		return WRITE_SUCCESS;
 	}
 
-	public int modify(PhotoBoard freeBoard) {
-		int row = photoBoardDao.update(freeBoard);
+	public int modify(PhotoBoard photoBoard) {
+		int row = photoBoardDao.update(photoBoard);
 		if (row == 0)
 			return MODIFY_FAIL;
 		return MODIFY_SUCCESS;

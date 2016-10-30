@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -49,6 +51,11 @@
 					<td><img src="showPhoto?savedfile=${photoboard.savedfile}" width="500px"></td>
 				</tr> 
 			</table>
-			<input type="submit" value="글쓰기">
+			<c:if test="${login == photoboard.bwriter}">
+				<div>
+					<a href="modify?bno=${photoboard.bno}">[수정]</a>
+					<a href="remove?bno=${photoboard.bno}">[삭제]</a>
+				</div>
+			</c:if>
 	</body>
 </html>
