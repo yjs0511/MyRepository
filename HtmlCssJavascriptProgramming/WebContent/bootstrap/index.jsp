@@ -8,11 +8,10 @@
 		<title>index</title>
 	</head>
 	<body><%-- 이거 들어갈까 --%>
-		Html, Css, JavaScript 학습
+		Bootstrap
 		<hr/>
-		1. <a href="htmlcss/index.jsp">HTML/Css </a><br/>
-		2. <a href="boostrap/index.jsp">Bootstrap </a><br/>
-		3. <a href="javascript/index.jsp">JavaScript </a><br/>
-		4. <a href="jquery/index.jsp">jQuery </a><br/>
+		1. <a href="01_css.jsp">부트스트랩 CSS 사용하기 ㅋ</a><br>
+		2. <a href="02_grid_system.jsp">Gid System(Layout 작성)</a><br>
+		3. <a href="03_layout.jsp">layout 작성</a><br>
 	</body>
 </html>
