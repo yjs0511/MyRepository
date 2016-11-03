@@ -7,8 +7,10 @@
 	<body>
 		jQuery
 		<hr/>
-		1. <a href="htmlcss/index.jsp">HTML/Css </a><br/>
-		2. <a href="javascript/index.jsp">JavaScript </a><br/>
-		3. <a href="jquery/index.jsp">jQuery </a><br/>
+		1) <a href="01_jquery_link.jsp">jQuery 라이브러리 로딩</a><br/>
+		2) <a href="02_what_is_$.jsp">$는 함수형 객체</a><br/>
+		3) <a href="03_ready_event.jsp">ready event 처리</a><br/>
+		4) <a href="04_find_object.jsp">객체 찾기</a><br/>
+		5) <a href="05_event_handling.jsp">이벤트 처리</a><br/>
 	</body>
 </html>
