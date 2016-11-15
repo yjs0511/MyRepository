@@ -112,7 +112,7 @@ public class PhotoBoardController {
 		try{
 			String fileName = savedfile;
 			/*
-			 * 브루우저에서 보여주지 않고 강제로 다운로드할 경우
+			 * 브라우저에서 보여주지 않고 강제로 다운로드할 경우
 			fileName = URLEncoder.encode(fileName, "UTF-8");	// 한글에 대한 유니코드로 받아서 16진수로 변환
 			response.setHeader("Content-Disposition", "attachment; filename=\""+ fileName +"\"");	//파일 첨부(다운로드) 기능 및 이름 지정
 			*/																				// \" \" 파일 이름이 어디 까지다 라는 걸 지정
@@ -121,7 +121,7 @@ public class PhotoBoardController {
 			
 			OutputStream os = response.getOutputStream();
 			
-			String filePath = request.getServletContext().getRealPath("/WEB-INF/photo/" + fileName); // Context 위치를 기준으로 그 아래 경로를 지정
+			String filePath = request.getServletContext().getRealPath("/WEB-INF/photo/" + fileName); // Context 위치를 기준으로 그 아래 경로를 지정, 실제 파일의 경로
 			InputStream is = new FileInputStream(filePath);
 			
 			byte[] values = new byte[1024];
