@@ -37,6 +37,4 @@ public class MainActivity extends AppCompatActivity {
         frame2.setVisibility(View.INVISIBLE);
         frame3.setVisibility(View.VISIBLE);
     }
-
-
 }

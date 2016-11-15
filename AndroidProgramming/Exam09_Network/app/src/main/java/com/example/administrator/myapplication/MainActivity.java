@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run(){
                 try {
-                    URL url = new URL("http://192.168.0.47:8080/myandroid/lightList");
+                    URL url = new URL("http://192.168.0.13:8080/myandroid/lightList");
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();  // 연결 객체를 얻는다. 연결 객체를 얻기만 함
                     conn.connect(); // 여기서 연결
 
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         Bitmap bitmap = null;
 
         try {
-            URL url = new URL("http://192.168.0.47:8080/myandroid/getImage?fileName="+fileName);
+            URL url = new URL("http://192.168.0.13:8080/myandroid/getImage?fileName="+fileName);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.connect();
 

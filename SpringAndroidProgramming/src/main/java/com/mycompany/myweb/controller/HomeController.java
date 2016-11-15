@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mycompany.myweb.dto.Food;
 import com.mycompany.myweb.dto.Light;
 
 /**
@@ -85,5 +86,15 @@ public class HomeController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping("/foodList")
+	public String foodList(Model model){
+		List<Food> list = new ArrayList<>();
+        list.add(new Food("food1.png", "food1_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 이런 가게는 처음이지?"));
+        
+        model.addAttribute("list", list);
+        
+		return "foodList";
 	}
 }
