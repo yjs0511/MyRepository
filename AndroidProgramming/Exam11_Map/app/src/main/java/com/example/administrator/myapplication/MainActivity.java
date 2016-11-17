@@ -18,6 +18,15 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,12 +42,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
     private ImageView imageLarge;
-    private Button btnList, btnMap;
+    private ToggleButton btnList, btnMap;
     private ListView lightList;
     private LightAdapter lightAdapter;
+
     private FrameLayout frameLayout;
+    private SupportMapFragment mapFragment;
+    private LinearLayout mapContainer;
     //private LightAdapter lightAdapter;
 
     @Override
@@ -47,10 +59,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imageLarge = (ImageView) findViewById(R.id.imageLarge);
-        btnList = (Button) findViewById(R.id.btnList);
+        btnList = (ToggleButton) findViewById(R.id.btnList);
         btnList.setOnClickListener(buttonClickListener);
-        btnMap = (Button) findViewById(R.id.btnMap);
+        btnMap = (ToggleButton) findViewById(R.id.btnMap);
         btnMap.setOnClickListener(buttonClickListener);
+
         frameLayout = (FrameLayout) findViewById(R.id.frameLayout);
 
         lightList = (ListView) findViewById(R.id.lightList);
@@ -96,6 +109,15 @@ public class MainActivity extends AppCompatActivity {
         testAsyncTask();
         fillItems();
 
+        mapContainer = (LinearLayout) findViewById(R.id.mapContainer);
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.mapFragment);    // fragment 의 id를 가져올 때는 액티비티에서 가져오는게 아니라 fragmentManager를 통해 받아온다
+        mapFragment.getMapAsync(this);                   // 프래그먼트와 액티비티를 비동기화 시키겠다(앱의 정상실행을 방해하면 안되기 때문에 비동기화로 진행) 지도를 받아올 동안 액티비티가 다른 일을 해도 되도록 비동기화
+
+        btnList.setChecked(true);
+        lightList.setVisibility(View.VISIBLE);
+        mapContainer.setVisibility(View.INVISIBLE);
     }
 
     private View.OnClickListener buttonClickListener = new View.OnClickListener() {
@@ -103,8 +125,14 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View view) {    // 매개변수로 현재 실행되는 view가 들어온다
             if(view == btnList){
                 Log.i("mylog", "btnList 클릭");
+                btnMap.setChecked(false);   // 현재 버튼이 눌렸을 때 다른 버튼이 안 눌린 상태가 되게 하기
+                lightList.setVisibility(View.VISIBLE);
+                mapContainer.setVisibility(View.INVISIBLE);
             }else if(view == btnMap){
                 Log.i("mylog", "btnMap 클릭");
+                btnList.setChecked(false);
+                lightList.setVisibility(View.INVISIBLE);
+                mapContainer.setVisibility(View.VISIBLE);
             }
         }
     };
@@ -251,4 +279,22 @@ public class MainActivity extends AppCompatActivity {
 
         return bitmap;
     }
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {   // 액티비티한테 지도 다 됬다고 알려줄 때 이거 사용
+        LatLng latLng = new LatLng(37.495085, 127.122247);
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));    // 줌 확대 범위  1: 우주에서 바라본 것, 15는 사람이 보기 편한 정도
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("IT 벤처타워");
+        googleMap.addMarker(markerOptions);
+    }
+
+    /*@Override
+    public void onMapReady(GoogleMap map) {
+        map.addMarker(new MarkerOptions()
+                .position(new LatLng(0, 0))
+                .title("Marker"));
+    }*/
 }

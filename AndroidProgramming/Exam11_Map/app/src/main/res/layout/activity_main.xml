@@ -140,6 +140,20 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/lightList" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mapContainer">
+
+            <fragment
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:id="@+id/mapFragment" />
+        </LinearLayout>
+
     </FrameLayout>
 
     <!-- 여기서는  android:orientation 속성이 horizontal 로 기본 세팅된다 -->
