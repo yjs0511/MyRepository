@@ -91,9 +91,22 @@ public class HomeController {
 	@RequestMapping("/foodList")
 	public String foodList(Model model){
 		List<Food> list = new ArrayList<>();
-        list.add(new Food("food1.png", "food1_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 이런 가게는 처음이지?"));
+        list.add(new Food("food01.png", "food01_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food02.png", "food02_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food03.png", "food03_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food04.png", "food04_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food05.png", "food05_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food06.jpg", "food06_large.jpg", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
         
-        model.addAttribute("list", list);
+        list.add(new Food("food01.png", "food01_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food02.png", "food02_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food03.png", "food03_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food04.png", "food04_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food05.png", "food05_large.png", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+        list.add(new Food("food06.jpg", "food06_large.jpg", "Name", "45,000 WON", "값도 비싸고 맛도 없고 비싸기만한 가게입니다. 어서와 이런 가게는 처음이지?"));
+
+        
+        model.addAttribute("flist", list);
         
 		return "foodList";
 	}

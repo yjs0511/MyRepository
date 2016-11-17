@@ -70,7 +70,6 @@ public class MemberController {
 		} catch (Exception e) {
 			return "member/joinForm";
 		}
-
 	}
 
 	@RequestMapping("/logout")

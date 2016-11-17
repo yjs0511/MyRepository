@@ -19,7 +19,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" /> <!-- 아이콘을 실행했을 때 뜨는 거 -->
             </intent-filter>
-        </activity>
+        </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <!-- . 앞에 package="com.example.administrator.myapplication 이게 생략되있다 -->
 
